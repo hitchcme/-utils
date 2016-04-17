@@ -1,17 +1,22 @@
-function [INTPATH] = build_INTPATHs()
-
+function [INTPATH] = build_INTPATHs(CF,CFPATH)
+	
+	
 	if ispc
 		DIRDELIM = '\';
 	else
 		DIRDELIM = '/';
 	end
-
-	THISFILE = mfilename;
-    THISDIR = mfilename('fullpath');
-    THISDIR = THISDIR(1:end-size(THISFILE,2));
-    %Fix THISDIR Variable for having selfcontained function file
-    THISDIR = utils.files.GetFullPath(horzcat(THISDIR,'..',DIRDELIM,'..',DIRDELIM));
-    
+	if nargin < 2
+		THISFILE = mfilename;
+		THISDIR = mfilename('fullpath');
+		THISDIR = THISDIR(1:end-size(THISFILE,2));
+		%Fix THISDIR Variable for having selfcontained function file
+		THISDIR = utils.files.GetFullPath(horzcat(THISDIR,'..',DIRDELIM,'..',DIRDELIM));
+	else
+		THISFILE = CF
+		THISDIR = CFPATH
+		THISDIR = THISDIR(1:end-size(THISFILE,2));
+	end
     %This one from when function locted inside importer function files
     DWORKDIR = horzcat(THISDIR,'.tmp',DIRDELIM);
     
