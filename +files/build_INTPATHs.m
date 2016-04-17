@@ -13,8 +13,8 @@ function [INTPATH] = build_INTPATHs(CF,CFPATH)
 		%Fix THISDIR Variable for having selfcontained function file
 		THISDIR = utils.files.GetFullPath(horzcat(THISDIR,'..',DIRDELIM,'..',DIRDELIM));
 	else
-		THISFILE = CF
-		THISDIR = CFPATH
+		THISFILE = CF;
+		THISDIR = CFPATH;
 		THISDIR = THISDIR(1:end-size(THISFILE,2));
 	end
     %This one from when function locted inside importer function files
